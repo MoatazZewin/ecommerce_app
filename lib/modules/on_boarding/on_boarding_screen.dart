@@ -3,6 +3,7 @@ import 'package:ecommerce_app/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 
 class OnBoardingModel {
@@ -32,6 +33,14 @@ class OnBoardingScreen extends StatelessWidget {
         image: 'assets/images/onboard_1.jpg'),
   ];
 
+  void onSubmit(context) {
+    CacheHelper.setData(key: 'onBoarding', value: true).then((value) {
+      if (value) {
+        navigateAndFinish(context: context, widget: LoginScreen());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +48,7 @@ class OnBoardingScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              navigateAndFinish(context: context, widget: LoginScreen());
+              onSubmit(context);
             },
             child: Text(
               'SKIP',
@@ -87,8 +96,7 @@ class OnBoardingScreen extends StatelessWidget {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
-                      navigateAndFinish(
-                          context: context, widget: LoginScreen());
+                      onSubmit(context);
                     } else {
                       pageController.nextPage(
                           duration: Duration(milliseconds: 750),

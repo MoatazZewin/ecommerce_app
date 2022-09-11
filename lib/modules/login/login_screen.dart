@@ -1,8 +1,11 @@
 import 'package:ecommerce_app/modules/login/cubit/login_cubit.dart';
 import 'package:ecommerce_app/modules/login/cubit/login_states.dart';
 import 'package:ecommerce_app/shared/components/components.dart';
+import 'package:ecommerce_app/shared/network/local/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../layout/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -15,6 +18,20 @@ class LoginScreen extends StatelessWidget {
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
+          if (state is LoginSucessState) {
+            print('state login ${state.loginModel.status}');
+            if (state.loginModel.status) {
+              print('message if is true ${state.loginModel.message}');
+              CacheHelper.setData(
+                      key: 'token', value: state.loginModel.data!.token)
+                  .then((value) {
+                navigateAndFinish(context: context, widget: HomeScreen());
+              });
+            } else {
+              showToast(
+                  message: state.loginModel.message, color: ToastState.EROERR);
+            }
+          }
         },
         builder: (context, state) => Scaffold(
           appBar: AppBar(),
@@ -32,6 +49,15 @@ class LoginScreen extends StatelessWidget {
                         'LOGIN',
                         style: Theme.of(context).textTheme.headline4!.copyWith(
                               color: Colors.black,
+                            ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text(
+                        'Login to browse our hot offers',
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                              color: Colors.grey,
                             ),
                       ),
                       SizedBox(
@@ -69,22 +95,44 @@ class LoginScreen extends StatelessWidget {
                           obscure: LoginCubit.get(context).isScure,
                           validatorMethod: (value) {
                             if (value!.isEmpty) {
-                              return 'please enter the email';
+                              return 'the password is too short';
                             }
                           }),
                       SizedBox(
                         height: 20.0,
                       ),
-                      state is !LoginLoadingState? defaultButton(
-                          text: 'login',
-                          onPressed: () {
-
-                            if (keyForm.currentState!.validate()) {
-                              LoginCubit.get(context).userLogin(
-                                  email: emailController.text,
-                                  password: passwordController.text);
-                            }
-                          }):Center(child: CircularProgressIndicator()),
+                      state is! LoginLoadingState
+                          ? defaultButton(
+                              text: 'login',
+                              onPressed: () {
+                                if (keyForm.currentState!.validate()) {
+                                  LoginCubit.get(context).userLogin(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                                }
+                              })
+                          : Center(child: CircularProgressIndicator()),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Don\`t have an account?'),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'REGISTER',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),

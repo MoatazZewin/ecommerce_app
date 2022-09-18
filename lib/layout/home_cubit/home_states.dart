@@ -1,0 +1,7 @@
+abstract class HomeLayoutStates{}
+
+class HomeLayoutInitialState extends HomeLayoutStates{}
+class HomeLayoutBottomNavStateChange extends HomeLayoutStates{}
+class EcommerceAppLoadingHomeDataState extends HomeLayoutStates{}
+class EcommerceAppSuccessHomeDataState extends HomeLayoutStates{}
+class EcommerceAppErrorHomeDataState extends HomeLayoutStates{}

@@ -15,6 +15,13 @@ class HomeScreen extends StatelessWidget {
            var cubit = HomeCubit.get(context);
            return Scaffold(
              appBar: AppBar(
+               title: Text(
+                   'Products',
+                 style: TextStyle(
+                   fontSize: 20.0,
+
+                 ),
+               ),
                actions: [
                  IconButton(onPressed: (){
                    navigateTo(context: context, widget: SearchScreen());

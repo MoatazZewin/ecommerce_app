@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
   HomeCubit() : super(HomeLayoutInitialState());
   static HomeCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
-  late HomeModel homeModel;
+   HomeModel? homeModel;
   List bottomScreens = [
     ProductsScreen(),
     CategoriesScreen(),
@@ -28,10 +28,12 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
 
   void getHomeData() {
     emit(EcommerceAppLoadingHomeDataState());
+    print(token);
     DioHelper.get(
       path: HOME,
       token: token,
     ).then((value) {
+      print("inised then");
       homeModel = HomeModel.formJson(value.data);
       print(homeModel.toString());
       emit(EcommerceAppSuccessHomeDataState());

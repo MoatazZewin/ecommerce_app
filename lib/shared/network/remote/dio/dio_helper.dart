@@ -17,7 +17,7 @@ class DioHelper {
   static Future<Response> get({
     required String path,
     Map<String ,dynamic>? query,
-    String lang = 'ar',
+    String lang = 'en',
     String? token })async
   {
     dio.options.headers = {
@@ -31,7 +31,7 @@ class DioHelper {
   static Future<Response> Post({
    required String path,
     Map<String, dynamic>? query,
-    String lang = 'ar',
+    String lang = 'en',
     String? token,
     required Map<String, dynamic> data
    })async{

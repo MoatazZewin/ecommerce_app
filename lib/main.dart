@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeCubit()..getHomeData()),
+        BlocProvider(create: (context) => HomeCubit()..getHomeData()..getCategoriesData()),
       ],
       child: BlocConsumer<HomeCubit, HomeLayoutStates>(
         listener: (context, state) {},
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
                   ),
                   color: Colors.white,
                   iconTheme: IconThemeData(
-                    color: defaultColor,
+                    color: Colors.black,
                   ),
                 ),
                 fontFamily: "jannah"),

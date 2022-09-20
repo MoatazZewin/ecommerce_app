@@ -16,10 +16,10 @@ class HomeScreen extends StatelessWidget {
            return Scaffold(
              appBar: AppBar(
                title: Text(
-                   'Products',
+                   'Home',
                  style: TextStyle(
                    fontSize: 20.0,
-
+                   color: Colors.black,
                  ),
                ),
                actions: [

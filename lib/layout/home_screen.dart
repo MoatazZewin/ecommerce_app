@@ -8,49 +8,46 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit,HomeLayoutStates>(
-         listener: (context,state){
-         },
-      builder: (context,state){
-           var cubit = HomeCubit.get(context);
-           return Scaffold(
-             appBar: AppBar(
-               title: Text(
-                   'Home',
-                 style: TextStyle(
-                   fontSize: 20.0,
-                   color: Colors.black,
-                 ),
-               ),
-               actions: [
-                 IconButton(onPressed: (){
-                   navigateTo(context: context, widget: SearchScreen());
-
-           }, icon: Icon(Icons.search,)),
-               ],
-             ),
-             body: cubit.bottomScreens[cubit.currentIndex] ,
-             bottomNavigationBar: BottomNavigationBar(
-
-               onTap: (index){
-                 cubit.changeBottomIndex(index);
-               },
-               currentIndex: cubit.currentIndex,
-
-               items: [
-                 BottomNavigationBarItem(icon: Icon(Icons.home),
-                     label: 'Home'),
-                 BottomNavigationBarItem(icon: Icon(Icons.apps),
-                     label: 'Categories'),
-                 BottomNavigationBarItem(icon: Icon(Icons.favorite),
-                     label: 'Favorite'),
-                 BottomNavigationBarItem(icon: Icon(Icons.settings),
-                     label: 'Settings'),
-
-               ],
-             ),
-           );
-      }
-    );
+    return BlocConsumer<HomeCubit, HomeLayoutStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = HomeCubit.get(context);
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Home',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
+                ),
+              ),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      navigateTo(context: context, widget: SearchScreen());
+                    },
+                    icon: Icon(
+                      Icons.search,
+                    )),
+              ],
+            ),
+            body: cubit.bottomScreens[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (index) {
+                cubit.changeBottomIndex(index);
+              },
+              currentIndex: cubit.currentIndex,
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.apps), label: 'Categories'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite), label: 'Favorite'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings), label: 'Settings'),
+              ],
+            ),
+          );
+        });
   }
 }

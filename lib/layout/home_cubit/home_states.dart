@@ -1,9 +1,20 @@
 abstract class HomeLayoutStates{}
 
 class HomeLayoutInitialState extends HomeLayoutStates{}
+
 class HomeLayoutBottomNavStateChange extends HomeLayoutStates{}
 class EcommerceAppLoadingHomeDataState extends HomeLayoutStates{}
 class EcommerceAppSuccessHomeDataState extends HomeLayoutStates{}
+
+
 class EcommerceAppErrorHomeDataState extends HomeLayoutStates{}
 class EcommerceAppSuccessCategoriesState extends HomeLayoutStates{}
 class EcommerceAppErrorCategoriesState extends HomeLayoutStates{}
+
+class EcommerceAppChangeFavorite extends HomeLayoutStates{}
+class EcommerceAppSuccessChangeFavoriteState extends HomeLayoutStates{}
+class EcommerceAppErrorChangeFavoriteState extends HomeLayoutStates{}
+
+class EcommerceAppSuccessGetFavoriteState extends HomeLayoutStates{}
+class EcommerceAppLoadingGetFavoriteState extends HomeLayoutStates{}
+class EcommerceAppErrorGetFavoriteState extends HomeLayoutStates{}

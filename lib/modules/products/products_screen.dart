@@ -17,15 +17,16 @@ class ProductsScreen extends StatelessWidget {
         var model = HomeCubit.get(context).homeModel;
         var categoryModel = HomeCubit.get(context).categoriesModel;
         return Scaffold(
-          body: (model != null) && (categoryModel != null )
-              ? productsBuilder(model, categoryModel)
+          body: (model != null) && (categoryModel != null)
+              ? productsBuilder(model, categoryModel,context)
               : Center(child: CircularProgressIndicator()),
         );
       },
     );
   }
 
-  Widget productsBuilder(HomeModel model,CategoriesModel categoriesModel ) => SingleChildScrollView(
+  Widget productsBuilder(HomeModel model, CategoriesModel categoriesModel, context) =>
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Column(
@@ -66,12 +67,15 @@ class ProductsScreen extends StatelessWidget {
                       fontSize: 25.0,
                     ),
                   ),
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Container(
                     height: 100.0,
                     child: ListView.separated(
                       physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => buildCategoryItem(categoriesModel.data!.data[index]),
+                      itemBuilder: (context, index) =>
+                          buildCategoryItem(categoriesModel.data!.data[index]),
                       separatorBuilder: (context, index) => SizedBox(
                         width: 10.0,
                       ),
@@ -103,7 +107,7 @@ class ProductsScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 children: List.generate(
                   model.data.products.length,
-                  (index) => buildGridProduct(model.data.products[index]),
+                  (index) => buildGridProduct(model.data.products[index],context),
                 ),
               ),
             ),
@@ -111,7 +115,7 @@ class ProductsScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildGridProduct(ProductModel model) {
+  Widget buildGridProduct(ProductModel model, context) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -169,8 +173,12 @@ class ProductsScreen extends StatelessWidget {
                       ),
                     Spacer(),
                     IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite),
+                      onPressed: () {
+                        HomeCubit.get(context).changeFavoritesDataModel(model.id);
+                      },
+                      icon: Icon(Icons.favorite,
+                      ),
+                      color: HomeCubit.get(context).favorite[model.id]!?Colors.red:Colors.grey,
                       padding: EdgeInsets.zero,
                     ),
                   ],
@@ -188,8 +196,7 @@ class ProductsScreen extends StatelessWidget {
       alignment: AlignmentDirectional.bottomStart,
       children: [
         Image(
-          image: NetworkImage(
-              '${model.image}'),
+          image: NetworkImage('${model.image}'),
           height: 100,
           width: 100,
           fit: BoxFit.cover,

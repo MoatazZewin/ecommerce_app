@@ -8,30 +8,29 @@ import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
 
 class FavoritesScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit,HomeLayoutStates>(
-        listener: (context, state) {},
-        builder:(context, state) {
-          var model = HomeCubit.get(context).favoritesModel.data;
-          print(model.data[0].product.toString());
+    return BlocConsumer<HomeCubit, HomeLayoutStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var model = HomeCubit.get(context).favoritesModel.data;
+        // print(model.data[0].product.toString());
 
-          return state is EcommerceAppLoadingGetFavoriteState?Center(child: CircularProgressIndicator()):Scaffold(
-            body: ListView.separated(
-                physics: BouncingScrollPhysics(),
-                itemBuilder:(context, index)=> buildFavoriteItem(model.data[index].product, context),
-                separatorBuilder:(context, index)=>  myDivider(),
-                itemCount: model.data.length) ,
-          );
-        },
-        );
+        return state is EcommerceAppLoadingGetFavoriteState
+            ? const Center(child: CircularProgressIndicator())
+            : Scaffold(
+                body: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) =>
+                        buildFavoriteItem(model.data[index].product, context),
+                    separatorBuilder: (context, index) => myDivider(),
+                    itemCount: model.data.length),
+              );
+      },
+    );
   }
 
-
-  Widget buildFavoriteItem(Product? model , context)
-  {
+  Widget buildFavoriteItem(Product? model, context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -48,17 +47,19 @@ class FavoritesScreen extends StatelessWidget {
                   width: 120,
                   height: 120,
                 ),
-                if (model?.discount!= 0)
+                if (model?.discount != 0)
                   Container(
                     color: Colors.red,
-                    child: Text(
+                    child: const Text(
                       'DISCOUNT',
                       style: TextStyle(fontSize: 8.0, color: Colors.white),
                     ),
                   ),
               ],
             ),
-            SizedBox(width: 20.0,),
+            const SizedBox(
+              width: 20.0,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,12 +68,12 @@ class FavoritesScreen extends StatelessWidget {
                     "'${model?.description}'",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14.0,
                       height: 1.3,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
                       Text(
@@ -81,25 +82,29 @@ class FavoritesScreen extends StatelessWidget {
                           color: defaultColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10.0,
                       ),
-                      if (model?.discount!= 0)
+                      if (model?.discount != 0)
                         Text(
                           '${model?.oldPrice}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {
-                           HomeCubit.get(context).changeFavoritesDataModel(model!.id);
+                          HomeCubit.get(context)
+                              .changeFavoritesDataModel(model!.id);
                         },
-                        icon: Icon(Icons.favorite,
+                        icon: const Icon(
+                          Icons.favorite,
                         ),
-                        color: HomeCubit.get(context).favorite[model?.id]!?Colors.red:Colors.grey,
+                        color: HomeCubit.get(context).favorite[model?.id]!
+                            ? Colors.red
+                            : Colors.grey,
                         padding: EdgeInsets.zero,
                       ),
                     ],

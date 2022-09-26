@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/layout/home_cubit/home_states.dart';
 import 'package:ecommerce_app/models/change_favorites_model.dart';
 import 'package:ecommerce_app/models/home_model.dart';
+import 'package:ecommerce_app/models/login_model.dart';
 import 'package:ecommerce_app/modules/favorites/favorites_screen.dart';
 import 'package:ecommerce_app/modules/products/products_screen.dart';
 import 'package:ecommerce_app/modules/setting/setting_screen.dart';
@@ -115,5 +116,23 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
       print("erorr inside the get favorite ${onError.toString()}");
       emit(EcommerceAppErrorGetFavoriteState());
     });
+  }
+
+  LoginModel? loginModel;
+  void getUserData()
+  {
+    DioHelper.get(
+      path: PROFILE,
+      token: token,
+    ).then((value) {
+      print('inside the get getUserData ${value.data}');
+      loginModel = LoginModel.fromJson(value.data);
+      emit(EcommerceAppSuccessUserDataState());
+    }).catchError((onError){
+
+      print(onError.toString());
+      emit(EcommerceAppErrorUserDataState());
+    });
+
   }
 }

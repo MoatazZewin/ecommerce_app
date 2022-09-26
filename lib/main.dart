@@ -40,12 +40,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   late Widget startWidget;
 
-  MyApp(this.startWidget); // This widget is the root of your application.
+  MyApp(this.startWidget, {Key? key}) : super(key: key); // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeCubit()..getHomeData()..getCategoriesData()..getFavorites()),
+        BlocProvider(create: (context) => HomeCubit()..getHomeData()..getCategoriesData()..getFavorites()..getUserData()),
       ],
       child: BlocConsumer<HomeCubit, HomeLayoutStates>(
         listener: (context, state) {},
@@ -68,13 +68,13 @@ class MyApp extends StatelessWidget {
                     color: defaultColor,
                   ),
                   elevation: 0.0,
-                  systemOverlayStyle: SystemUiOverlayStyle(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
                     systemNavigationBarIconBrightness: Brightness.dark,
                     statusBarColor: Colors.white,
                     statusBarIconBrightness: Brightness.dark,
                   ),
                   color: Colors.white,
-                  iconTheme: IconThemeData(
+                  iconTheme: const IconThemeData(
                     color: Colors.black,
                   ),
                 ),

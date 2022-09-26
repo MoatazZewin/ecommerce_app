@@ -18,3 +18,6 @@ class EcommerceAppErrorChangeFavoriteState extends HomeLayoutStates{}
 class EcommerceAppSuccessGetFavoriteState extends HomeLayoutStates{}
 class EcommerceAppLoadingGetFavoriteState extends HomeLayoutStates{}
 class EcommerceAppErrorGetFavoriteState extends HomeLayoutStates{}
+
+class EcommerceAppSuccessUserDataState extends HomeLayoutStates{}
+class EcommerceAppErrorUserDataState extends HomeLayoutStates{}

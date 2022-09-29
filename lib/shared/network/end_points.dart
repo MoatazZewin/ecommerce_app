@@ -12,5 +12,7 @@ const register = 'register';
 
 const updateProfile = 'update-profile';
 
+const search = 'products/search';
+
 
 

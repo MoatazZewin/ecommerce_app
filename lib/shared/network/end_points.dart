@@ -1,10 +1,16 @@
-const LOGIN = 'login';
+const login = 'login';
 
-const HOME = 'home';
+const home = 'home';
 
-const CATEGORIES = 'categories';
+const categories = 'categories';
 
-const FAVORITES = 'favorites';
+const favorites = 'favorites';
 
-const PROFILE = 'profile';
+const profile = 'profile';
+
+const register = 'register';
+
+const updateProfile = 'update-profile';
+
+
 

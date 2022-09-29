@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../layout/home_screen.dart';
 import '../../shared/components/constants.dart';
+import '../register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                               color: Colors.grey,
                             ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       defaultTextFromField(
@@ -74,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                               return 'please enter the email';
                             }
                           }),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       defaultTextFromField(
@@ -99,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                               return 'the password is too short';
                             }
                           }),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       state is! LoginLoadingState
@@ -112,20 +113,22 @@ class LoginScreen extends StatelessWidget {
                                       password: passwordController.text);
                                 }
                               })
-                          : Center(child: CircularProgressIndicator()),
-                      SizedBox(
+                          : Center(child: const CircularProgressIndicator()),
+                      const SizedBox(
                         height: 20.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\`t have an account?'),
-                          SizedBox(
+                          const Text('Don\`t have an account?'),
+                          const SizedBox(
                             width: 5.0,
                           ),
                           TextButton(
-                            onPressed: () {},
-                            child: Text(
+                            onPressed: () {
+                              navigateTo(context: context, widget: RegisterScreeen());
+                            },
+                            child: const Text(
                               'REGISTER',
                               style: TextStyle(
                                 color: Colors.blue,

@@ -17,7 +17,7 @@ class LoginCubit extends Cubit<LoginStates> {
     required String password,
   }) {
     emit(LoginLoadingState());
-    DioHelper.Post(path: LOGIN, data: {
+    DioHelper.Post(path: login, data: {
       'email': email,
       'password': password,
     }).then((value) {

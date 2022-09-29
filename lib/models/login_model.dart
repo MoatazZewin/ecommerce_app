@@ -1,7 +1,7 @@
 class LoginModel {
   late bool status;
-   late String message;
-  UserData? data;
+    String message = '';
+   UserData? data;
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -20,13 +20,13 @@ class UserData {
   late double credit;
   late String token;
   UserData.fromJson(Map<String, dynamic> json) {
-    this.id = json['id'];
-    this.name = json['name'];
-    this.email = json['email'] ?? '';
-    this.phone = json['phone'];
-    this.image = json['image'];
-    this.points = json['points'];
-    this.credit = json["credit"];
-    this.token = json['token'];
+    id = json['id'];
+    name = json['name'];
+    email = json['email'] ?? '';
+    phone = json['phone'];
+    image = json['image'];
+    points = json['points'];
+    credit = json['credit'];
+    token = json['token'];
   }
 }

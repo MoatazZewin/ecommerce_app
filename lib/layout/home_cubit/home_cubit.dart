@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
     emit(EcommerceAppLoadingHomeDataState());
     print(token);
     DioHelper.get(
-      path: HOME,
+      path: home,
       token: token,
     ).then((value) {
       print("inised then");
@@ -57,7 +57,7 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
   }
 
   void getCategoriesData() {
-    DioHelper.get(path: CATEGORIES).then((value) {
+    DioHelper.get(path: categories).then((value) {
       categoriesModel = CategoriesModel.fromJson(value.data);
       emit(EcommerceAppSuccessCategoriesState());
     }).catchError((onError) {
@@ -77,7 +77,7 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
     print('the token is ${token}');
 
     DioHelper.Post(
-      path: FAVORITES,
+      path: favorites,
       data: {
         'product_id': productId,
       },
@@ -107,32 +107,50 @@ class HomeCubit extends Cubit<HomeLayoutStates> {
   void getFavorites() {
     emit(EcommerceAppLoadingGetFavoriteState());
 
-    DioHelper.get(path: FAVORITES, token: token).then((value) {
+    DioHelper.get(path: favorites, token: token).then((value) {
       print('insid the get favorites model');
       favoritesModel = FavoritesModel.formJson(value.data);
       print('inside the get favorites ${value.data}');
       emit(EcommerceAppSuccessGetFavoriteState());
     }).catchError((onError) {
-      print("erorr inside the get favorite ${onError.toString()}");
+      print("error inside the get favorite ${onError.toString()}");
       emit(EcommerceAppErrorGetFavoriteState());
     });
   }
 
-  LoginModel? loginModel;
-  void getUserData()
-  {
+   LoginModel? loginModel;
+  void getUserData() {
     DioHelper.get(
-      path: PROFILE,
+      path: profile,
       token: token,
     ).then((value) {
       print('inside the get getUserData ${value.data}');
       loginModel = LoginModel.fromJson(value.data);
-      emit(EcommerceAppSuccessUserDataState());
-    }).catchError((onError){
 
+      emit(EcommerceAppSuccessUserDataState());
+    }).catchError((onError) {
       print(onError.toString());
       emit(EcommerceAppErrorUserDataState());
     });
+  }
 
+  void updateUserData({
+    required String name,
+    required String email,
+    required String phone,
+  }) {
+    emit(EcommerceAppLoadingUpdateUserState());
+    DioHelper.putData(path: updateProfile, token: token, data: {
+      'name': name,
+      'email': email,
+      'phone': phone,
+    }).then((value) {
+      loginModel = LoginModel.fromJson(value.data);
+      print('inside updateUserdata ${loginModel}');
+      emit(EcommerceAppSuccessUpdateUserState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(EcommerceAppErrorUpdateUserState());
+    });
   }
 }

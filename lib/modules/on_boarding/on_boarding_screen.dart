@@ -33,7 +33,7 @@ class OnBoardingScreen extends StatelessWidget {
         image: 'assets/images/onboard_1.jpg'),
   ];
 
-  void onSubmit(context) {
+  void onSubmit(context){
     CacheHelper.setData(key: 'onBoarding', value: true).then((value) {
       if (value) {
         navigateAndFinish(context: context, widget: LoginScreen());
@@ -50,32 +50,33 @@ class OnBoardingScreen extends StatelessWidget {
             onPressed: () {
               onSubmit(context);
             },
-            child: Text(
+            child: const Text(
               'SKIP',
             ),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: PageView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: pageController,
                 itemBuilder: (context, index) {
-                  if (index == boarding.length - 1)
+                  if (index == boarding.length - 1) {
                     isLast = true;
-                  else
+                  } else {
                     isLast = false;
+                  }
                   return buildBoardingItem(boarding[index]);
                 },
                 itemCount: boarding.length,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             Row(
@@ -92,24 +93,24 @@ class OnBoardingScreen extends StatelessWidget {
                     activeDotColor: defaultColor,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
                       onSubmit(context);
                     } else {
                       pageController.nextPage(
-                          duration: Duration(milliseconds: 750),
+                          duration: const Duration(milliseconds: 750),
                           curve: Curves.fastLinearToSlowEaseIn);
                     }
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_forward_ios,
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             )
           ],
@@ -128,16 +129,16 @@ class OnBoardingScreen extends StatelessWidget {
           ),
           Text(
             '${list.title}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30.0,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           Text(
             '${list.body}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10.0,
             ),
           ),

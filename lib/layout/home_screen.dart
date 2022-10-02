@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           var cubit = HomeCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: Text(
+              title: const Text(
                 'Home',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       navigateTo(context: context, widget: SearchScreen());
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                     )),
               ],
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                 cubit.changeBottomIndex(index);
               },
               currentIndex: cubit.currentIndex,
-              items: [
+              items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.apps), label: 'Categories'),

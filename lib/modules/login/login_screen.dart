@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                               color: Colors.black,
                             ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       Text(
@@ -113,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                                       password: passwordController.text);
                                 }
                               })
-                          : Center(child: const CircularProgressIndicator()),
+                          : const Center(child: CircularProgressIndicator()),
                       const SizedBox(
                         height: 20.0,
                       ),
@@ -126,7 +126,8 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              navigateTo(context: context, widget: RegisterScreeen());
+                              navigateTo(
+                                  context: context, widget: RegisterScreeen());
                             },
                             child: const Text(
                               'REGISTER',

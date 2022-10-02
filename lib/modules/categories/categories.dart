@@ -33,17 +33,17 @@ class CategoriesScreen extends StatelessWidget {
             height: 100,
             width: 100,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10.0,
           ),
           Text(
             "${model.name}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20.0,
             ),
           ),
-          Spacer(),
-          Icon(Icons.arrow_forward_ios),
+          const Spacer(),
+          const Icon(Icons.arrow_forward_ios),
         ],
       ),
     );
